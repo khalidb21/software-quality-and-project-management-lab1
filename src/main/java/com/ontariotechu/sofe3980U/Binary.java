@@ -94,13 +94,13 @@ public class Binary
 	*
 	* @param num1 The first operand object
 	* @param num2 The second operand object	
-	* @return A binary variable with a value of <i>num1|num2</i>.
+	* @return A binary variable with a value of <i>num1||num2</i>.
 	*/
 	public static Binary bitwiseOR(Binary num1,Binary num2) {
 		int i = num1.number.length() - 1;
 		int j = num2.number.length() - 1;
 
-		String resultStr = "";
+		String result = "";
 
 		// Process bits from right (LSB) to left (MSB)
 		while (i >= 0 || j >= 0)
@@ -113,14 +113,14 @@ public class Binary
 			char resultBit = (bit1 == '1' || bit2 == '1') ? '1' : '0';
 
 			// Append to a result string
-			resultStr = resultBit + resultStr;
+			result = resultBit + result;
 
 			// Move to the next bit
 			i--;
 			j--;
 		}
 
-    	return new Binary(resultStr);
+    	return new Binary(result);
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class Binary
 	*
 	* @param num1 The first operand object
 	* @param num2 The second operand object	
-	* @return A binary variable with a value of <i>num1&amp;num2</i>.
+	* @return A binary variable with a value of <i>num1&amp;&amp;num2</i>.
 	*/
 	public static Binary bitwiseAND(Binary num1,Binary num2) {
 		int i = num1.number.length() - 1;
@@ -194,7 +194,7 @@ public class Binary
 			// increment shift for the next digit in the multiplier
 			shift++;
 		}
-		
+
 		return result;
 	}
 }	
