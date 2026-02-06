@@ -87,4 +87,114 @@ public class Binary
 		return result;
 		
 	}
+
+	/**
+	* Bitwise Logical OR operation for two binary variables. Peformed for each bit of the two numbers, the result is 1 if at least one of the bits is 1, otherwise it is 0. 
+	* For more information, visit <a href="https://www.geeksforgeeks.org/digital-logic/basics-of-boolean-algebra-in-digital-electronics/"> this link </a>.
+	*
+	* @param num1 The first operand object
+	* @param num2 The second operand object	
+	* @return A binary variable with a value of <i>num1|num2</i>.
+	*/
+	public static Binary bitwiseOR(Binary num1,Binary num2) {
+		int i = num1.number.length() - 1;
+		int j = num2.number.length() - 1;
+
+		String resultStr = "";
+
+		// Process bits from right (LSB) to left (MSB)
+		while (i >= 0 || j >= 0)
+		{
+			// Get current bits, if index is out of range, consider it as '0'
+			char bit1 = (i >= 0) ? num1.number.charAt(i) : '0';
+			char bit2 = (j >= 0) ? num2.number.charAt(j) : '0';
+
+			// OR operation
+			char resultBit = (bit1 == '1' || bit2 == '1') ? '1' : '0';
+
+			// Append to a result string
+			resultStr = resultBit + resultStr;
+
+			// Move to the next bit
+			i--;
+			j--;
+		}
+
+    	return new Binary(resultStr);
+	}
+
+	/**
+	* Bitwise Logical AND operation for two binary variables. Peformed for each bit of the two numbers, the result is 1 if both bits are 1, otherwise it is 0.
+	* For more information, visit <a href="https://www.geeksforgeeks.org/digital-logic/basics-of-boolean-algebra-in-digital-electronics/"> this link </a>.
+	*
+	* @param num1 The first operand object
+	* @param num2 The second operand object	
+	* @return A binary variable with a value of <i>num1&amp;num2</i>.
+	*/
+	public static Binary bitwiseAND(Binary num1,Binary num2) {
+		int i = num1.number.length() - 1;
+		int j = num2.number.length() - 1;
+
+		String result = "";
+
+		// Process bits from right (LSB) to left (MSB)
+		while (i >= 0 || j >= 0)
+		{
+			// Get current bits, if index is out of range, consider it as '0'
+			char bit1 = (i >= 0) ? num1.number.charAt(i) : '0';
+			char bit2 = (j >= 0) ? num2.number.charAt(j) : '0';
+
+			// AND operation
+			char resultBit = (bit1 == '1' && bit2 == '1') ? '1' : '0';
+
+			// Append to a result string
+			result = resultBit + result;
+			
+			// Move to the next bit 
+			i--;
+			j--;
+		}
+
+		return new Binary(result);
+	}
+
+	/**
+	* Multiplication operation for two binary variables. Can be performed the same way as multiplication for decimal values, except base is now 2.
+	* For more information, visit <a href="https://www.geeksforgeeks.org/maths/binary-multiplication/"> this link </a>.
+	*
+	* @param num1 The multiplicand object
+	* @param num2 The multiplier object
+	* @return A binary variable with a value of <i>num1*num2</i>.
+	*/
+	public static Binary multiply(Binary num1, Binary num2) {
+		
+		// Variable to store result
+		Binary result = new Binary("0");
+		
+		// use int variable to track digit shift
+		int shift = 0;
+
+		// Perform binary multiplication (reference link provided)
+		// traverse binary num2 from right to left (LSB to MSB)
+		for (int i = num2.number.length() - 1; i >= 0; i--)
+		{
+			// Check if multiplier digit is 1, if 0 skip
+			if (num2.number.charAt(i) == '1')
+			{
+				// Shift num1 left by appending zeros for the current position of the multiplier digit (2^shift)
+				String shifted = num1.number;
+				for (int j = 0; j < shift; j++)
+				{
+					shifted += "0";
+				}
+
+				// Uses already implement adding method and add shifted value to result
+				result = add(result, new Binary(shifted));
+			}
+			// increment shift for the next digit in the multiplier
+			shift++;
+		}
+		
+		return result;
+	}
 }	
