@@ -118,4 +118,94 @@ public class BinaryTest
 		Binary binary3=Binary.add(binary1,binary2);
         assertTrue( binary3.getValue().equals("0"));
     }
+    /**
+     * Test The multiply method with two binary numbers of equal length
+     */
+    @Test
+    public void multiply() {
+		Binary binary1=new Binary("1010");
+		Binary binary2=new Binary("1000");
+		Binary binary3=Binary.multiply(binary1,binary2);
+        assertTrue( binary3.getValue().equals("1010000"));
+    }
+    /**
+     * Test The multiply method with two binary numbers of different lengths
+     */
+    @Test
+    public void multiply2() {
+        Binary binary1=new Binary("101");
+        Binary binary2=new Binary("1101");
+        Binary binary3=Binary.multiply(binary1,binary2);
+        assertTrue( binary3.getValue().equals("1000001"));
+    }
+    /**
+     * Test The multiply method with two larger binary numbers
+     */
+    @Test
+    public void multiply3() {
+        Binary binary1=new Binary("1011101010101");
+        Binary binary2=new Binary("10000");
+        Binary binary3=Binary.multiply(binary1,binary2);
+        assertTrue( binary3.getValue().equals("10111010101010000"));
+    }
+    /**
+     * Test The bitwiseOR method with two binary numbers with mixed bits
+     */
+    @Test
+    public void bitwiseOR() {
+        Binary binary1=new Binary("101010");
+        Binary binary2=new Binary("110011");
+        Binary binary3=Binary.bitwiseOR(binary1,binary2);
+        assertTrue( binary3.getValue().equals("111011"));
+    }
+    /**
+     * Test The bitwiseOR method with one binary numbers that has all zeroes
+     */
+    @Test
+    public void bitwiseOR2() {
+        Binary binary1=new Binary("000000");
+        Binary binary2=new Binary("110011");
+        Binary binary3=Binary.bitwiseOR(binary1,binary2);
+        assertTrue( binary3.getValue().equals("110011"));
+    }
+    /**
+     * Test The bitwiseOR method with different length binary numbers
+     */
+    @Test
+    public void bitwiseOR3() {
+        Binary binary1=new Binary("101");
+        Binary binary2=new Binary("110011");
+        Binary binary3=Binary.bitwiseOR(binary1,binary2);
+        assertTrue( binary3.getValue().equals("110111"));
+    }
+    /**
+     * Test The bitwiseAND method with two binary numbers with mixed bits
+     */
+    @Test
+    public void bitwiseAND() {
+        Binary binary1=new Binary("101010");
+        Binary binary2=new Binary("110011");
+        Binary binary3=Binary.bitwiseAND(binary1,binary2);
+        assertTrue( binary3.getValue().equals("100010"));
+    }
+    /**
+     * Test The bitwiseAND method with one binary numbers that has all ones
+     */
+    @Test
+    public void bitwiseAND2() {
+        Binary binary1=new Binary("111111");
+        Binary binary2=new Binary("110011");
+        Binary binary3=Binary.bitwiseAND(binary1,binary2);
+        assertTrue( binary3.getValue().equals("110011"));
+    }
+    /**
+     * Test The bitwiseAND method with different length binary numbers
+     */
+    @Test
+    public void bitwiseAND3() {
+        Binary binary1=new Binary("101");
+        Binary binary2=new Binary("110011");
+        Binary binary3=Binary.bitwiseAND(binary1,binary2);
+        assertTrue( binary3.getValue().equals("1"));
+    }
 }
